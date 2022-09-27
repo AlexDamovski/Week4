@@ -9,26 +9,26 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-//Import Mongoose Module
+// Import Mongoose Module
 import mongoose from 'mongoose';
 
 // Configuration Module
 import { MongoURI, Secret } from '../config/config.js';
 
 // Import Routes
-import indexRouter from './routes/index.route.server.js';
+import indexRouter from './routes/index.route.server.js'
 import movieRouter from './routes/movies.route.server.js';
 
 // Instantiate Express Application
 const app = express();
 
-//Complete the DB Configuration
+// Complete the DB Configuration
 mongoose.connect(MongoURI);
-const db  = mongoose.connection;
+const db = mongoose.connection;
 
-//Listen for connections success or error
+//Listen for connection success or error
 db.on('open', () => console.log("Connected to MongoDB"));
-db.on('error', () => console.log("Mongo Connection error"));
+db.on('error', () => console.log("Mongo Connection Error"));
 
 // Set Up Middlewares
 
@@ -51,6 +51,7 @@ app.use(session({
 // Use Routes
 app.use('/', indexRouter);
 app.use('/', movieRouter);
+
 
 export default app;
 
